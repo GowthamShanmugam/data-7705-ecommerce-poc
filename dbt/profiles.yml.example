@@ -3,8 +3,8 @@ ecommerce_poc:
   outputs:
     dev:
       type: snowflake
-      account: "<your-account-identifier>"
-      user: "<your-snowflake-username>"
+      account: BRZDEJI-QL84586
+      user: GOWTHAM
       password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
       role: ACCOUNTADMIN
       warehouse: COMPUTE_WH

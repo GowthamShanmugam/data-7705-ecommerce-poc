@@ -183,7 +183,14 @@ cd dbt
 cp profiles.yml.example profiles.yml
 ```
 
-Set `account` (SQL result, e.g. `BRZDEJI-QL84586`) and `user` (login, e.g. `GOWTHAM`) in `profiles.yml`. Keep `password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"`.
+In `profiles.yml` set these two lines (no `https://`, no `.snowflakecomputing.com`, no `< >`):
+
+```yaml
+account: BRZDEJI-QL84586
+user: GOWTHAM
+```
+
+Keep `password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"`.
 
 ```bash
 python3 -m venv .venv
@@ -196,6 +203,8 @@ dbt run
 
 `dbt debug` checks login. `dbt run` creates `STG_ORDERS`, `SALES_BY_CATEGORY`, `ORDERS_PER_CUSTOMER`, `SALES_TREND` in `ECOMMERCE_POC_DB.MARTS`.
 
+![dbt run: 4 models PASS](./docs/dbt-run-success.png)
+
 ---
 
 ### 8. Query the metrics
@@ -207,4 +216,6 @@ cd ..
 snow --config-file="$HOME/.snowflake/config.toml" sql -f snowflake/04_verify_metrics.sql
 ```
 
-You should see sales by category, by customer, and by month.
+![CLI: SALES_BY_CATEGORY, ORDERS_PER_CUSTOMER, SALES_TREND](./docs/verify-metrics.png)
+
+You should see sales by category (Furniture 1731.00, Office 402.70, Electronics 376.99), by customer, and by month.
