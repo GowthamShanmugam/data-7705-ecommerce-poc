@@ -1,0 +1,11 @@
+-- Core metric: orders per customer (completed orders only).
+
+SELECT
+  CUSTOMER_ID,
+  MAX(CUSTOMER_NAME) AS CUSTOMER_NAME,
+  COUNT(*) AS ORDER_COUNT,
+  SUM(LINE_AMOUNT) AS TOTAL_SALES
+FROM {{ ref('stg_orders') }}
+WHERE STATUS = 'completed'
+  AND CUSTOMER_ID IS NOT NULL
+GROUP BY CUSTOMER_ID

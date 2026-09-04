@@ -1,0 +1,13 @@
+ecommerce_poc:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: BRZDEJI-QL84586
+      user: GOWTHAM
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: ACCOUNTADMIN
+      warehouse: SNOWFLAKE_LEARNING_WH
+      database: SNOWFLAKE_LEARNING_DB
+      schema: MARTS
+      threads: 4

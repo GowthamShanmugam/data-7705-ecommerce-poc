@@ -1,0 +1,11 @@
+-- Core metric: total sales by category (completed orders only).
+
+SELECT
+  CATEGORY,
+  COUNT(*) AS ORDER_COUNT,
+  SUM(LINE_AMOUNT) AS TOTAL_SALES,
+  SUM(QUANTITY) AS UNITS_SOLD
+FROM {{ ref('stg_orders') }}
+WHERE STATUS = 'completed'
+  AND CATEGORY IS NOT NULL
+GROUP BY CATEGORY
