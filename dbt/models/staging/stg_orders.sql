@@ -1,6 +1,3 @@
--- Clean the raw e-commerce orders.
--- Handles extra spaces, mixed-case category, missing names/products, non-completed rows.
-
 SELECT
   ORDER_ID,
   TRY_TO_DATE(ORDER_DATE) AS ORDER_DATE,

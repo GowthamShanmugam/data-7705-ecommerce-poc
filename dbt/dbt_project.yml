@@ -9,10 +9,8 @@ clean-targets: ["target", "dbt_packages"]
 
 models:
   ecommerce_poc:
-    +database: SNOWFLAKE_LEARNING_DB
+    +database: ECOMMERCE_POC_DB
     staging:
-      +schema: MARTS
       +materialized: view
     marts:
-      +schema: MARTS
       +materialized: table

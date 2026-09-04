@@ -2,7 +2,8 @@ version: 2
 
 sources:
   - name: raw
-    database: SNOWFLAKE_LEARNING_DB
+    database: FIVETRAN_DB
     schema: RAW
     tables:
       - name: orders
+        identifier: ORDERS

@@ -3,11 +3,11 @@ ecommerce_poc:
   outputs:
     dev:
       type: snowflake
-      account: BRZDEJI-QL84586
-      user: GOWTHAM
+      account: "<your-account-identifier>"
+      user: "<your-snowflake-username>"
       password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
       role: ACCOUNTADMIN
-      warehouse: SNOWFLAKE_LEARNING_WH
-      database: SNOWFLAKE_LEARNING_DB
+      warehouse: COMPUTE_WH
+      database: ECOMMERCE_POC_DB
       schema: MARTS
       threads: 4

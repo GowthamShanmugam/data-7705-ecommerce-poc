@@ -1,5 +1,3 @@
--- Core metric: sales trend by month.
-
 SELECT
   DATE_TRUNC('month', ORDER_DATE) AS ORDER_MONTH,
   COUNT(*) AS ORDER_COUNT,

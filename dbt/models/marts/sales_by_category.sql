@@ -1,5 +1,3 @@
--- Core metric: total sales by category (completed orders only).
-
 SELECT
   CATEGORY,
   COUNT(*) AS ORDER_COUNT,

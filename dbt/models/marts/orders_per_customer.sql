@@ -1,5 +1,3 @@
--- Core metric: orders per customer (completed orders only).
-
 SELECT
   CUSTOMER_ID,
   MAX(CUSTOMER_NAME) AS CUSTOMER_NAME,
