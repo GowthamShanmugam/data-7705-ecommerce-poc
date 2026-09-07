@@ -22,8 +22,8 @@ After signup, Snowflake sends this email. **Username** (`GOWTHAM`) is `user` in 
 
 ```bash
 brew install snowflake-cli
-git clone https://github.com/GowthamShanmugam/data-7705-ecommerce-poc.git
-cd data-7705-ecommerce-poc
+git clone https://github.com/GowthamShanmugam/ddis-onboarding-lab.git
+cd ddis-onboarding-lab
 ```
 
 Get your Snowflake account id. You will paste it in the CLI (step 3), Fivetran (step 5), and dbt (step 7).
