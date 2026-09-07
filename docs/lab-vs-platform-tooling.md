@@ -41,6 +41,32 @@ Data still moves the same way as in the lab. Git and platform tools replace the 
 
 Read left to right: **Fivetran-iac** points Fivetran at Snowflake. **Fivetran-manager** creates each connector from YAML. Fivetran fills `fivetran_db`. The **operator** builds the empty product database. **dbt** (from the product repo, run by Astro) fills marts. **Usernaut** and **key-manager** handle people and passwords so none of that uses `ACCOUNTADMIN` on a laptop.
 
+## Where these tools run
+
+Not every repo in `platform-tooling` is a long-running app on OpenShift. Operators stay up in the cluster. CLIs and Terraform run in GitLab CI, then exit. Fivetran and Snowflake stay SaaS. Vault holds secrets.
+
+| Tool | On OpenShift? | What it is |
+|---|---|---|
+| [data-platform-operator](https://gitlab.cee.redhat.com/dataverse/platform-tooling/data-platform-operator) | **Yes** — always on | Kubernetes operator. Controllers in a cluster namespace apply Snowflake objects from YAML. |
+| [usernaut](https://gitlab.cee.redhat.com/dataverse/platform-tooling/usernaut) | **Yes** — always on | Kubernetes operator (plus Redis) in namespaces such as `ddis-asteroid--usernaut-rhpreprod`. GitLab uses `oc apply` to roll it out. |
+| [fivetran-manager](https://gitlab.cee.redhat.com/dataverse/platform-tooling/fivetran-manager) | **Uses OpenShift; not a long-running app there** | CLI/container. GitLab CI (or a laptop) runs it. It **applies** Fivetran connector objects into an OpenShift namespace (`ddis-asteroid--fivetran-operator-rh…`). An operator **in that namespace** then talks to the Fivetran API. |
+| [fivetran-iac](https://gitlab.cee.redhat.com/dataverse/platform-tooling/fivetran-iac) | **No** | Terraform in GitLab CI. Creates the Fivetran → Snowflake **destination** in Fivetran cloud. No OpenShift pod. |
+| [snowflake-key-manager](https://gitlab.cee.redhat.com/dataverse/platform-tooling/snowflake-key-manager) | **No** | CLI in GitLab CI (or a laptop). Rotates Snowflake keys and stores them in Vault. |
+
+```text
+Always running on OpenShift
+  data-platform-operator
+  usernaut
+  (Fivetran connector objects + the operator that watches them)
+
+Runs in GitLab CI, not as an OpenShift service
+  fivetran-iac          → Fivetran cloud
+  fivetran-manager      → oc apply into OpenShift, then exits
+  snowflake-key-manager → Snowflake + Vault
+```
+
+OpenShift is where **operators** live. GitLab CI is what runs Terraform and the CLIs.
+
 ## Lab step vs Dataverse
 
 | Lab (manual) | In Dataverse? | What happens |

@@ -12,6 +12,8 @@ Google Sheets  →  Fivetran  →  FIVETRAN_DB.RAW  →  dbt  →  ECOMMERCE_POC
 
 Sheets is the source. Fivetran copies it into Snowflake. dbt writes clean tables in `MARTS`. You query `MARTS`.
 
+After the lab, read [How this lab maps to Dataverse](./docs/lab-vs-platform-tooling.md). That page shows which Git repos and OpenShift operators replace the clicks in this README.
+
 Written for **macOS** with Homebrew. Run SQL in the Snowflake website (**Projects → Workspaces**).
 
 ## What you need
